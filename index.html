@@ -16,10 +16,20 @@
     </style>
 </head>
 <body>
-    <h1>ini lacak lokasi code by: syarifkanz </h1>    
+    <h1>Pelacakan Lokasi</h1>    
     <div id="map"></div>
 
     <script>
+        // Minta izin dengan alert
+        function requestLocation() {
+            let izin = confirm("Izinkan situs ini mengakses lokasi Anda?");
+            if (izin) {
+                getLocation();
+            } else {
+                alert("Anda menolak akses lokasi.");
+            }
+        }
+
         // Fungsi untuk mendapatkan lokasi
         function getLocation() {
             if (navigator.geolocation) {
@@ -33,6 +43,9 @@
         function sendLocation(position) {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
+
+            // Tampilkan lokasi dalam alert
+            alert(`Lokasi Anda:\nLatitude: ${latitude}\nLongitude: ${longitude}`);
 
             // Tampilkan peta
             const map = new google.maps.Map(document.getElementById('map'), {
@@ -77,8 +90,8 @@
             }
         }
 
-        // Panggil fungsi getLocation() secara otomatis saat halaman dimuat
-        window.onload = getLocation;
+        // Panggil fungsi requestLocation() saat halaman dimuat
+        window.onload = requestLocation;
     </script>
 
     <!-- Ganti YOUR_API_KEY dengan API Key Google Maps -->
